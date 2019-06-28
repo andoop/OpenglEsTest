@@ -1,9 +1,9 @@
 package com.zhihu.android.opengltest;
 
+import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
-import android.os.SystemClock;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -13,6 +13,8 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
     private Triangle mTriangle;
     private Square   mSquare;
+    private Image mImage;
+    private Context mContext;
 
     // vPMatrix is an abbreviation for "Model View Projection Matrix"
     private final float[] vPMatrix = new float[16];
@@ -21,13 +23,14 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
     private float[] rotationMatrix = new float[16];
 
+    public MyGLRenderer(Context context){
+        mContext = context;
+    }
+
     public void onSurfaceCreated(GL10 unused, EGLConfig config) {
         // Set the background frame color
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        // initialize a triangle
-        mTriangle = new Triangle();
-        // initialize a square
-        mSquare = new Square();
+        mImage = new Image(mContext);
     }
 
     public void onDrawFrame(GL10 unused) {
@@ -55,7 +58,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
 
         // Draw triangle
-        mSquare.draw(scratch);
+        mImage.draw(scratch);
     }
 
     public void onSurfaceChanged(GL10 unused, int width, int height) {
