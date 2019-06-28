@@ -55,7 +55,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
 
         // Draw triangle
-        mTriangle.draw(scratch);
+        mSquare.draw(scratch);
     }
 
     public void onSurfaceChanged(GL10 unused, int width, int height) {
