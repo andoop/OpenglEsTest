@@ -8,6 +8,7 @@ import static android.opengl.GLES20.GL_LINK_STATUS;
 import static android.opengl.GLES20.GL_VALIDATE_STATUS;
 import static android.opengl.GLES20.GL_VERTEX_SHADER;
 import static android.opengl.GLES20.glAttachShader;
+import static android.opengl.GLES20.glCompileShader;
 import static android.opengl.GLES20.glCreateProgram;
 import static android.opengl.GLES20.glCreateShader;
 import static android.opengl.GLES20.glDeleteProgram;
@@ -38,17 +39,18 @@ public class ShaderHelper {
                 Log.i(TAG, "compileShader: 创建 shader 失败：" + shaderCode);
             return 0;
         }
-        glShaderSource(type, shaderCode);
+        glShaderSource(shaderObjectId, shaderCode);
+        glCompileShader(shaderObjectId);
         int[] compileStatus = new int[1];
         glGetShaderiv(shaderObjectId, GL_COMPILE_STATUS, compileStatus, 0);
-        if (LogConfig.ON)
-            Log.i(TAG, "compileShader: 编译结果：" + compileStatus[0]+" "+shaderCode);
+        if (LogConfig.ON) {
+            Log.i(TAG, "compileShader: 编译结果：" + compileStatus[0] + " " + shaderCode);
+            Log.i(TAG, "compileShader: 编译信息：" + glGetShaderInfoLog(shaderObjectId));
+
+        }
         if (compileStatus[0] == 0) {
             glDeleteShader(shaderObjectId);
         }
-        if (LogConfig.ON)
-            Log.i(TAG, "compileShader: 编译信息：" + glGetShaderInfoLog(shaderObjectId));
-
         return shaderObjectId;
     }
 
