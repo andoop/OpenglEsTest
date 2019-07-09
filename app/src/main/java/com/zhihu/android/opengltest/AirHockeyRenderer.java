@@ -48,8 +48,8 @@ public class AirHockeyRenderer implements GLSurfaceView.Renderer {
         glViewport(0, 0, width, height);
         MatrixHelper.perspectiveM(projectionMatrix, 45, (float) width / (float) height, 1f, 10f);
         Matrix.setIdentityM(modelMatrix, 0);
-        Matrix.translateM(modelMatrix, 0, 0f, 0f, -2.5f);
-        Matrix.rotateM(modelMatrix, 0, -60f, 1f, 0f, 0f);
+        Matrix.translateM(modelMatrix, 0, 0f, 0f, -3.0f);
+        Matrix.rotateM(modelMatrix, 0, -45f, 1f, 0f, 0f);
         float[] temp = new float[16];
         Matrix.multiplyMM(temp, 0, projectionMatrix, 0, modelMatrix, 0);
         System.arraycopy(temp, 0, projectionMatrix, 0, temp.length);

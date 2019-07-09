@@ -8,7 +8,7 @@ import com.zhihu.android.opengltest.programs.ColorShaderProgram;
 
 public class Mallet {
     private static final int POSITION_COMPONENT_COUNT = 2;
-    private static final int COLOR_COMPONENT_COUNT = 2;
+    private static final int COLOR_COMPONENT_COUNT = 3;
     private static final int STRIDE = (POSITION_COMPONENT_COUNT + COLOR_COMPONENT_COUNT) * Constants.BYTES_PER_FLOAT;
     private static final float[] VERTEX_DATA = {
             0.0f, -0.4f, 0.0f, 0.0f, 1.0f,
